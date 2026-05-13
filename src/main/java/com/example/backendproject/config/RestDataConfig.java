@@ -1,6 +1,10 @@
 package com.example.backendproject.config;
-
+// I made sure all the packages were imported here
+import com.example.backendproject.controllers.*;
+import com.example.backendproject.dao.*;
 import com.example.backendproject.entities.*;
+import com.example.backendproject.services.*;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -38,9 +42,9 @@ public class RestDataConfig implements RepositoryRestConfigurer {
         config.exposeIdsFor(Customer.class);
         config.exposeIdsFor(Division.class);
         config.exposeIdsFor(Excursion.class);
-        config.exposeIdsFor(Vacation.class);
+        config.exposeIdsFor(Vacation.class);*/
         config.setDefaultPageSize(Integer.MAX_VALUE);
-        config.setMaxPageSize(Integer.MAX_VALUE);   */
+        config.setMaxPageSize(Integer.MAX_VALUE);
 
 
     }
