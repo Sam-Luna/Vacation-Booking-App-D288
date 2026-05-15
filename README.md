@@ -6,7 +6,7 @@ TASK C:
 - I also created a temporary class inside each one so the program can run.
 - I imported them as packcages in RestDataConfig.java
 
-D.   Write code for the entities package that includes entity classes and the enum designed to match the UML diagram.
+Task D: Write code for the entities package that includes entity classes and the enum designed to match the UML diagram.
 
 E.   Write code for the dao package that includes repository interfaces for the entities that extend JpaRepository, and add cross-origin support.
 
