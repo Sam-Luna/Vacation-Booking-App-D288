@@ -1,11 +1,13 @@
 package com.example.backendproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -37,6 +39,7 @@ public class Vacation {
     @Column(name = "last_update")
     private Date last_update;
 
+    @JsonProperty("excursions")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vacation")
-    private Set<Excursion> excursions;
+    private Set<Excursion> excursions = new HashSet<>();
 }

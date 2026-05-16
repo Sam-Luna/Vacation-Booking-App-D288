@@ -25,11 +25,11 @@ public class CartItem {
     @Column(name = "last_update")
     private Date last_update;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id", nullable = false)
-    public Cart cart;
+    private Cart cart;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vacation_id", nullable = false)
     private Vacation vacation;
 

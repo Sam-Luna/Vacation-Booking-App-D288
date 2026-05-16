@@ -1,7 +1,9 @@
 package com.example.backendproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -11,12 +13,13 @@ import java.util.Set;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "excursions")
 public class Excursion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+  
     @Column(name =  "excursion_id")
     private Long id;
 
@@ -35,7 +38,8 @@ public class Excursion {
     @Column(name = "last_update")
     private Date last_update;
 
-    @ManyToOne
+    @JsonBackReference //no looping to vacation
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vacation_id")
     private Vacation vacation;
 

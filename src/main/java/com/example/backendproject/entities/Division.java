@@ -1,12 +1,14 @@
 package com.example.backendproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.lang.NonNull;
+
 
 import java.util.Date;
 import java.util.HashSet;
@@ -39,14 +41,20 @@ public class Division {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "division")
     private Set<Customer> customers = new HashSet<>();
 
-    @JsonProperty("country_id")
+    @Column(name = "country_id")
+    private Long country_id;
+
+    //TODO: JSONBACKREFERENCE and JSONManagedReference in country
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id", nullable = false, insertable = false, updatable = false)
     private Country country;
 
-    @JsonProperty("country_id")
-    @Column(name = "country_id")
-    private Long country_id;
+    @JsonIgnore//don't create getCountry
+    public Country getCountry() {
+        return this.country;
+    }
+
     public void setCountry(Country country) {
         setCountry_id(country.getId());
         this.country = country;

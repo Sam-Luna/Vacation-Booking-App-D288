@@ -1,5 +1,6 @@
 package com.example.backendproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +30,7 @@ public class Customer {
     private String address;
 
     @Column(name = "postal_code")
-    private String postalCode;
+    private String postal_code;
 
     @Column(name = "phone")
     private String phone;
@@ -40,8 +41,13 @@ public class Customer {
     @Column(name = "last_update")
     private Date last_update;
 
-    @ManyToOne
-    @JoinColumn(name = "division_id", nullable = false)
+    //@JsonProperty("division_id")
+    @Column(name = "division_id")
+    private Long division_id;
+
+    @JsonBackReference //does not serialize this field to repvent loops
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "division_id", insertable = false, updatable = false)
     private Division division;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
