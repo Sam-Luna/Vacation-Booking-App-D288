@@ -46,9 +46,19 @@ public class Cart {
     private Date last_update;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", nullable = false)
+    @JoinColumn(name = "customer_id", nullable = false) //FOREIGN KEY linking it to Customer.java
     private Customer customer;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
     private Set<CartItem> cart_item = new HashSet<>();
+
+    //TODO: add helper method to be used in CheckoutServiceImpl
+     public void add(CartItem cartItem){
+         //item cannot be null
+         if(cartItem != null){
+             cartItem.setCart(this);
+             cart_item.add(cartItem);
+         }
+
+     }
 }

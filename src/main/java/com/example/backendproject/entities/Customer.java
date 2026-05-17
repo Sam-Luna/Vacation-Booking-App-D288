@@ -48,12 +48,20 @@ public class Customer {
     @Column(name = "last_update")
     private Date last_update;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer")
-    private Set<Cart> carts = new HashSet<>();
-
     @JsonProperty("division_id")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "division_id")
     private Division division;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer")
+    private Set<Cart> carts = new HashSet<>();
+
+    //TODO: add helper method to be used in CheckoutServiceImpl
+    public void add(Cart cart){
+        if(cart != null){
+            cart.setCustomer(this); //letting the current object know who their customer is.
+            carts.add(cart);        //adding to SET
+        }
+    }
 
 }

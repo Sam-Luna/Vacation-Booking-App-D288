@@ -1,10 +1,10 @@
-## WGU Backend Programming Project
+## Backend Programming Project
 ### Samantha Luna
 
 TASK C: 
 - I created four packages: controllers, entities,dao, and services.
 - I also created a temporary class inside each one so the program can run.
-- I imported them as packcages in RestDataConfig.java
+- I imported them as packages in RestDataConfig.java
 
 Task D: Write code for the entities package that includes entity classes and the enum designed to match the UML diagram.
 
@@ -12,13 +12,13 @@ E.   Write code for the dao package that includes repository interfaces for the 
 
 F.   Write code for the services package that includes each of the following:
 
-•    a purchase data class with a customer cart and a set of cart items
+- a purchase data class with a customer cart and a set of cart items
 
-•    a purchase response data class that contains an order tracking number
+- a purchase response data class that contains an order tracking number
 
-•    a checkout service interface
+- a checkout service interface
 
-•    a checkout service implementation class
+- a checkout service implementation class
 
 
 G.   Write code to include validation to enforce the inputs needed by the Angular front-end.
