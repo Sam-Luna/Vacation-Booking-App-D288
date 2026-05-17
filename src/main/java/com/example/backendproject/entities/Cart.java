@@ -3,6 +3,8 @@ package com.example.backendproject.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -35,9 +37,11 @@ public class Cart {
     @Enumerated(EnumType.STRING)
     private StatusType status;
 
+    @CreationTimestamp
     @Column(name = "create_date")
     private Date create_date;
 
+    @UpdateTimestamp
     @Column(name = "last_update")
     private Date last_update;
 

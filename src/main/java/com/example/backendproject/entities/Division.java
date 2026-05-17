@@ -1,10 +1,10 @@
 package com.example.backendproject.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -17,6 +17,8 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
+@NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "divisions")
 public class Division {
 
@@ -44,19 +46,14 @@ public class Division {
     @Column(name = "country_id")
     private Long country_id;
 
-    //TODO: JSONBACKREFERENCE and JSONManagedReference in country
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id", nullable = false, insertable = false, updatable = false)
     private Country country;
 
-    @JsonIgnore//don't create getCountry
-    public Country getCountry() {
-        return this.country;
-    }
-
+    //todo: check if i need this
+    /*
     public void setCountry(Country country) {
         setCountry_id(country.getId());
         this.country = country;
-    }
+    }*/
 }

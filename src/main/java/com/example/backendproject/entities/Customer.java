@@ -1,22 +1,27 @@
 package com.example.backendproject.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "customers")
 public class Customer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "customer_id")
     private Long id;
 
@@ -35,21 +40,20 @@ public class Customer {
     @Column(name = "phone")
     private String phone;
 
+    @CreationTimestamp
     @Column(name = "create_date")
     private Date create_date;
 
+    @UpdateTimestamp
     @Column(name = "last_update")
     private Date last_update;
 
-    //@JsonProperty("division_id")
-    @Column(name = "division_id")
-    private Long division_id;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer")
+    private Set<Cart> carts = new HashSet<>();
 
-    @JsonBackReference //does not serialize this field to repvent loops
+    @JsonProperty("division_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "division_id", insertable = false, updatable = false)
+    @JoinColumn(name = "division_id")
     private Division division;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    private Set<Cart> carts = new HashSet<>();
 }
