@@ -29,6 +29,7 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         //populate customer with cart
         customer.add(cart);
+
         //populate Cart with CartItems
         Set<CartItem> cartItems = purchase.getCartItems();
         cartItems.forEach(item -> cart.add(item));
@@ -36,6 +37,11 @@ public class CheckoutServiceImpl implements CheckoutService {
         // generate tracking number and set to cart item
         String orderTrackingNumber = generateOrderTrackingNumber();
         cart.setOrderTrackingNumber(orderTrackingNumber);
+
+        //check if cart OR cartItems are null OR if cartItems is empty
+        if(cart == null || cartItems.isEmpty() || cartItems == null ){
+            orderTrackingNumber = "Cart cannot be empty!";
+        }
 
         //save to database
         customerRepository.save(customer);
