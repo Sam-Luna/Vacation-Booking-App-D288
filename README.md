@@ -1,43 +1,64 @@
 ## Backend Programming Project
-### Samantha Luna
+### Samantha Sawyer
+
+The following Document is a log of the work I have done for each task required for the project.
+This documents the backend implementation of the Spring Boot REST API supporting vacation package checkout.
 
 TASK C: 
 - I created four packages: controllers, entities,dao, and services.
-- I also created a temporary class inside each one so the program can run.
-- I imported them as packages in RestDataConfig.java
 
-Task D: Write code for the entities package that includes entity classes and the enum designed to match the UML diagram.
+Path: src/main/java/com/example/backendproject <--- All four packages are under <b>com.example.backendproject</b>
+- Since I haven't written any code in these packages yet, the program will flag these packages when I try to deploy it.
+To mitigate this, I created a temporary class inside each one so the program can run with no issues.
+- I then imported each package in RestDataConfig.java.
 
-E.   Write code for the dao package that includes repository interfaces for the entities that extend JpaRepository, and add cross-origin support.
+Path: src/main/java/com/example/backendproject/config/RestDataConfig.java
 
-F.   Write code for the services package that includes each of the following:
+TASK D:
+I wrote the logic for the entities packages that match the UML diagram provided for this project. This was done with two
+big goals in mind: 
+- Matching each entity to the correct database table, and ensuring tables and columns are both properly linked to the
+MySQL database. I also ensured that the relationships between the entities properly reflected their relationships in the database.
 
-- a purchase data class with a customer cart and a set of cart items
+- Ensuring each entity is also properly linked to its front-end counterpart. 
 
-- a purchase response data class that contains an order tracking number
+TASK E:
 
-- a checkout service interface
+I wrote the logic for the dao package. This includes 7 repository interfaces that extend the Jpa Repository.
+I also added cross-origin support to ensure a successful connection to the front-end.
 
-- a checkout service implementation class
+TASK F: 
 
+I wrote the logic for the services package that includes:
 
-G.   Write code to include validation to enforce the inputs needed by the Angular front-end.
+- a Purchase data class with a customer cart and a set of cart items.
 
-H.   Write code for the controllers package that includes a REST controller checkout controller class with a post mapping to place orders.
+- a PurchaseResponse data class that contains an order tracking number.
 
-Note: You do not need to duplicate REST functionality for each repository by creating methods in Java.
+- a CheckoutService interface.
 
-I.   Add five sample customers to the application programmatically.
-
-Note: Make sure the customer information is not overwritten each time you run the application.
-
-J.   Run your integrated application by adding a customer order for a vacation with two excursions using the unmodified Angular front-end. Provide screenshots for the following:
-
-•    that your application does not generate a network error when adding the data
-
-•    your database tables using MySQL Workbench to show the data was successfully added
+- a CheckoutServiceImplementation class.
 
 
-Note: The screenshot should include the front-end view and the inspection console in the browser.
+TASK G:
 
-K.   Demonstrate professional communication in the content and presentation of your submission.
+I wrote the logic to include validation to enforce the inputs needed by the angular front end. 
+The inputs that needed validation are based on the Database's NOTNULL constraint.
+
+TASK H: 
+
+I wrote the logic for the Controllers package that included a REST controller. This checkout controller class uses
+@RequestMapping and @PostMapping to place orders.
+
+TASK I:
+
+I programmatically added five sample customers in BootStrapData.java
+This was done while ensuring the customers are only added as sample customers when/if the database is empty. 
+And while ensuring the customer information is not overwritten each time the application is deployed.
+
+TASK J: For this task, I verified the app worked as intended with no issues or bugs.
+
+- Ran the integrated application and submitted a customer order for a vacation package with two excursions 
+using the unmodified Angular front-end.
+- Confirmed the request completed without generating a network error, verified via the browser's inspection console.
+- Verified the order data was successfully written by inspecting the corresponding tables in MySQL Workbench.

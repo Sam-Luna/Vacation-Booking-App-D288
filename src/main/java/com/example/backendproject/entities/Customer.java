@@ -57,7 +57,7 @@ public class Customer {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer")
     private Set<Cart> carts = new HashSet<>();
 
-    //TODO: add helper method to be used in CheckoutServiceImpl
+
     public void add(Cart cart){
         if(cart != null){
             cart.setCustomer(this); //letting the current object know who their customer is.
