@@ -1,64 +1,57 @@
-## Backend Programming Project
-### Samantha Sawyer
+# A SpringBoot REST API backend for a vacation package booking and checkout system.
 
-The following Document is a log of the work I have done for each task required for the project.
-This documents the backend implementation of the Spring Boot REST API supporting vacation package checkout.
+## Overview:
 
-TASK C: 
-- I created four packages: controllers, entities,dao, and services.
-
-Path: src/main/java/com/example/backendproject <--- All four packages are under <b>com.example.backendproject</b>
-- Since I haven't written any code in these packages yet, the program will flag these packages when I try to deploy it.
-To mitigate this, I created a temporary class inside each one so the program can run with no issues.
-- I then imported each package in RestDataConfig.java.
-
-Path: src/main/java/com/example/backendproject/config/RestDataConfig.java
-
-TASK D:
-I wrote the logic for the entities packages that match the UML diagram provided for this project. This was done with two
-big goals in mind: 
-- Matching each entity to the correct database table, and ensuring tables and columns are both properly linked to the
-MySQL database. I also ensured that the relationships between the entities properly reflected their relationships in the database.
-
-- Ensuring each entity is also properly linked to its front-end counterpart. 
-
-TASK E:
-
-I wrote the logic for the dao package. This includes 7 repository interfaces that extend the Jpa Repository.
-I also added cross-origin support to ensure a successful connection to the front-end.
-
-TASK F: 
-
-I wrote the logic for the services package that includes:
-
-- a Purchase data class with a customer cart and a set of cart items.
-
-- a PurchaseResponse data class that contains an order tracking number.
-
-- a CheckoutService interface.
-
-- a CheckoutServiceImplementation class.
+The Vacation Booking API is a backend REST service supporting an online vacation booking platform. A user can create a 
+customer record. Once a customer is created, the user can browse and select a vacation destination, 
+then optionally select an excursion to add to the order, which is exclusive to the vacation destination.<br>
+Excursions are optional, but a vacation selection is required to check out. Completing the checkout processes the order 
+as a single transaction and generates tracking information. 
+The backend is build with Spring Boot and communicates with a pre-build Angular front-end and a MySQL relational database.
 
 
-TASK G:
+## Tech-Stack:  
+- Java
+- SpringBoot
+- MySQL
+- Git
+- Hibernate/JPA
 
-I wrote the logic to include validation to enforce the inputs needed by the angular front end. 
-The inputs that needed validation are based on the Database's NOTNULL constraint.
+## Architecture:
 
-TASK H: 
+The backend is organized in four main packages. <br>
+Path: src/main/java/com/example/backendproject 
 
-I wrote the logic for the Controllers package that included a REST controller. This checkout controller class uses
-@RequestMapping and @PostMapping to place orders.
+### entities package: Contains data models that match the UMl diagram provided.
+> Each entity maps to its corresponding database table and its front-end counterpart.
+Relationships between these entities properly reflect their relationships in the database.
 
-TASK I:
+### DAO package: 
+> This includes 7 repository interfaces that extend the Jpa Repository 
+that handle data access to each entity. Includes cross-origin support to ensure a successful connection to the front-end.
 
-I programmatically added five sample customers in BootStrapData.java
-This was done while ensuring the customers are only added as sample customers when/if the database is empty. 
-And while ensuring the customer information is not overwritten each time the application is deployed.
+### services package: contains the business logic for checkout. 
 
-TASK J: For this task, I verified the app worked as intended with no issues or bugs.
+ > Includes the cart handling (**Purchase**) and order confirmation (**PurchaseResponse**), 
+ implemented via a **CheckoutService** interface and its implementation.
 
-- Ran the integrated application and submitted a customer order for a vacation package with two excursions 
-using the unmodified Angular front-end.
-- Confirmed the request completed without generating a network error, verified via the browser's inspection console.
+### Controllers Package:
+
+> REST endpoints exposed to the frontend, including a checkout controller that uses @POST to process incoming orders.
+
+The API is used by an Angular frontend with CORS configuration that supports cross-origin requests. 
+
+## Key Features:
+
+- checkout logic supporting multi-item orders as a single transaction.
+- input validation tied to database constraints
+- CORS support for the Angular frontend
+- includes sample data, while ensuring the customer information is not overwritten each time the application is deployed.
+- returns tracking number after a successful transaction
+
+## Testing/Verification:
+
+- Verified checkout end-to-end and confirmed the request completed without generating a network error, 
+verified via the browser's inspection console.
 - Verified the order data was successfully written by inspecting the corresponding tables in MySQL Workbench.
+- implemented and tested input validation for required fields.
